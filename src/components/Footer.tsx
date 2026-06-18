@@ -22,7 +22,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-sm">
                 <Phone className="h-4 w-4 text-secondary" />
-                <span>(99) 99999-9999</span>
+                <span>(32) 99114-5249</span>
               </li>
               <li className="flex items-center gap-2 text-sm">
                 <MapPin className="h-4 w-4 text-secondary" />
