@@ -1,16 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { CheckCircle2 } from 'lucide-react';
 import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
 export function Hero() {
   const truckImg = PlaceHolderImages?.find(img => img.id === 'hero-truck');
-  const points = [
-    "Atendimento rápido",
-    "Fretes locais e viagens",
-    "Cuidado com seus itens",
-    "Orçamento pelo WhatsApp"
-  ];
 
   return (
     <section className="relative overflow-hidden bg-primary px-4 py-16 md:py-24">
@@ -55,15 +48,6 @@ export function Hero() {
             >
               Solicitar orçamento agora
             </Link>
-          </div>
-
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {points.map((point) => (
-              <div key={point} className="flex items-center gap-2 text-secondary font-semibold">
-                <CheckCircle2 className="h-5 w-5 shrink-0" />
-                <span className="text-sm md:text-base">{point}</span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
