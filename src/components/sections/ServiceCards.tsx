@@ -105,7 +105,6 @@ export function ServiceCards() {
               </CardHeader>
 
               <CardContent className="flex-1 space-y-8">
-                {/* Medidas Úteis */}
                 <div className="grid grid-cols-3 gap-4 p-4 rounded-2xl bg-primary/10 border border-primary/20">
                   <div className="flex flex-col items-center text-center gap-1">
                     <Ruler className="h-5 w-5 text-secondary opacity-70" />
@@ -170,7 +169,7 @@ export function ServiceCards() {
 
                   <Button asChild className="w-full h-12 bg-secondary text-white font-bold hover:bg-secondary/90 shadow-lg shadow-secondary/20">
                     <Link href={`/agendar?caminhao=${truck.id}`}>
-                      Solicitar este caminhão
+                      Escolher esse caminhão
                     </Link>
                   </Button>
                 </div>
@@ -179,7 +178,6 @@ export function ServiceCards() {
           ))}
         </div>
 
-        {/* Bloco de Orientação */}
         <div className="mt-16 max-w-4xl mx-auto rounded-3xl bg-white p-8 md:p-12 shadow-2xl border-4 border-primary/20 flex flex-col md:flex-row items-center gap-8">
           <div className="h-20 w-20 shrink-0 rounded-full bg-primary/20 flex items-center justify-center">
             <HelpCircle className="h-10 w-10 text-secondary" />

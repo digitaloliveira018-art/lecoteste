@@ -96,7 +96,7 @@ export function BookingQuiz() {
 
   const generateMessage = () => {
     const truckChoice = formData.preferredTruck 
-      ? `\n🚛 Caminhão de interesse: ${formData.preferredTruck.toUpperCase()}\n`
+      ? `\n🚚 Caminhão de interesse:\n${formData.preferredTruck.charAt(0).toUpperCase() + formData.preferredTruck.slice(1)}\n`
       : "";
 
     const aiPart = aiRecommendation 
@@ -168,6 +168,20 @@ Aguardo o retorno com o orçamento. Obrigado!`;
         <Progress value={progressValue} className="h-2 bg-muted transition-all" />
       </div>
 
+      {formData.preferredTruck && step < TOTAL_STEPS && (
+        <div className="mb-6 rounded-xl bg-primary/20 p-4 border border-primary/40 flex items-center gap-3">
+          <Truck className="h-5 w-5 text-secondary shrink-0" />
+          <div>
+            <p className="text-sm font-bold text-secondary">
+              Você selecionou o caminhão: {formData.preferredTruck.charAt(0).toUpperCase() + formData.preferredTruck.slice(1)}
+            </p>
+            <p className="text-xs text-secondary/70">
+              Continue respondendo para enviarmos as informações completas para o orçamento.
+            </p>
+          </div>
+        </div>
+      )}
+
       <AnimatePresence mode="wait">
         <motion.div
           key={step}
@@ -202,10 +216,10 @@ Aguardo o retorno com o orçamento. Obrigado!`;
               </div>
               {formData.preferredTruck && (
                 <div className="space-y-1">
-                  <p className="font-bold text-secondary/60">Veículo Escolhido</p>
+                  <p className="font-bold text-secondary/60">Caminhão de interesse</p>
                   <p className="font-medium flex items-center gap-2 text-secondary">
                     <Truck className="h-4 w-4" />
-                    {formData.preferredTruck === 'iveco' ? 'Caminhão Iveco' : 'Sprinter'}
+                    {formData.preferredTruck === 'iveco' ? 'Iveco' : 'Sprinter'}
                   </p>
                 </div>
               )}
@@ -227,7 +241,7 @@ Aguardo o retorno com o orçamento. Obrigado!`;
               <div className="rounded-xl bg-primary/20 p-4 border border-primary/40 flex items-start gap-3 mt-4">
                  <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-1" />
                  <div>
-                    <p className="text-sm font-bold text-secondary">Sugestão de Caminhão (Leco AI): {aiRecommendation.size}</p>
+                    <p className="text-sm font-bold text-secondary">Sugestão Leco AI: {aiRecommendation.size}</p>
                     <p className="text-xs text-secondary/70 mt-0.5">{aiRecommendation.reason}</p>
                  </div>
               </div>
