@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
 export function Navbar() {
-  const logo = PlaceHolderImages.find(img => img.id === 'logo');
+  const logo = PlaceHolderImages?.find(img => img.id === 'logo');
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

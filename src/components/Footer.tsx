@@ -4,7 +4,7 @@ import { COMPANY_NAME } from '@/app/lib/constants';
 import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
 export function Footer() {
-  const logo = PlaceHolderImages.find(img => img.id === 'logo');
+  const logo = PlaceHolderImages?.find(img => img.id === 'logo');
 
   return (
     <footer className="border-t bg-white">
