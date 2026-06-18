@@ -1,7 +1,11 @@
+
 import Link from 'next/link';
-import { Truck, CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
+import { CheckCircle2 } from 'lucide-react';
+import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
 export function Hero() {
+  const truckImg = PlaceHolderImages?.find(img => img.id === 'hero-truck');
   const points = [
     "Atendimento rápido",
     "Fretes locais e viagens",
@@ -43,11 +47,20 @@ export function Hero() {
 
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative h-[300px] w-full max-w-[500px] md:h-[400px]">
-            {/* Visual illustration representing the truck logo identity */}
+            {/* Visual illustration representing the truck */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-64 w-80 rounded-2xl bg-secondary/10 flex items-center justify-center">
-                 <Truck className="h-48 w-48 text-secondary" strokeWidth={1.5} />
-              </div>
+              {truckImg && (
+                <div className="relative h-72 w-full md:h-96">
+                   <Image 
+                     src={truckImg.imageUrl} 
+                     alt={truckImg.description}
+                     fill
+                     className="object-contain drop-shadow-2xl"
+                     priority
+                     data-ai-hint={truckImg.imageHint}
+                   />
+                </div>
+              )}
               <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full bg-secondary/5 blur-2xl" />
               <div className="absolute -top-4 -right-4 h-32 w-32 rounded-full bg-secondary/10 blur-3xl" />
             </div>
