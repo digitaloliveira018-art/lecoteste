@@ -37,7 +37,7 @@ export function Hero() {
               Fretes rápidos, seguros e com preço justo
             </h1>
             <p className="max-w-[600px] mx-auto lg:mx-0 text-lg font-medium text-secondary/80 md:text-xl">
-              A Leco Fretes realiza fretes locais, pequenas mudanças e viagens com cuidado, agilidade e compromisso do início ao fim.
+              Leco Fretes realiza fretes locais, pequenas mudanças e viagens com cuidado, agilidade e compromisso do início ao fim.
             </p>
           </div>
           

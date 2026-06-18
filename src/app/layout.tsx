@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Leco Fretes - Fretes Rápidos e Seguros',
-  description: 'A Leco Fretes realiza fretes locais, pequenas mudanças e viagens com cuidado, agilidade e compromisso.',
+  description: 'Leco Fretes realiza fretes locais, pequenas mudanças e viagens com cuidado, agilidade e compromisso.',
 };
 
 export default function RootLayout({

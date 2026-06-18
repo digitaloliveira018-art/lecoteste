@@ -43,7 +43,7 @@ const prompt = ai.definePrompt({
   name: 'aiRecommendedVehicleSizePrompt',
   input: {schema: AIRecommendedVehicleSizeInputSchema},
   output: {schema: AIRecommendedVehicleSizeOutputSchema},
-  prompt: `Você é um assistente de logística da Leco Fretes.
+  prompt: `Você é um assistente de logística de Leco Fretes.
 Sua tarefa é analisar a descrição dos itens que o cliente precisa transportar e recomendar o tamanho de caminhão mais adequado, fornecendo também uma breve justificativa.
 
 Considere as seguintes categorias de tamanho:

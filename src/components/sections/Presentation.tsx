@@ -24,9 +24,9 @@ export function Presentation() {
     <section className="bg-white py-20">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Conheça a Leco Fretes</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Conheça Leco Fretes</h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            A Leco Fretes nasceu para facilitar a vida de quem precisa transportar móveis, eletrodomésticos, caixas, mercadorias ou fazer pequenas mudanças com segurança e praticidade. Atendemos fretes locais e também viagens, sempre buscando oferecer um serviço organizado, pontual e transparente.
+            Leco Fretes nasceu para facilitar a vida de quem precisa transportar móveis, eletrodomésticos, caixas, mercadorias ou fazer pequenas mudanças com segurança e praticidade. Atendemos fretes locais e também viagens, sempre buscando oferecer um serviço organizado, pontual e transparente.
           </p>
         </div>
 

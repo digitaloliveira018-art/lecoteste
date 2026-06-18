@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -69,7 +68,7 @@ export function ServiceCards() {
             Estrutura para diferentes tipos de frete
           </h2>
           <p className="text-lg text-muted-foreground">
-            A Leco Fretes conta com caminhões preparados para atender desde pequenos fretes até mudanças maiores, sempre escolhendo o veículo mais adequado para cada serviço.
+            Leco Fretes conta com caminhões preparados para atender desde pequenos fretes até mudanças maiores, sempre escolhendo o veículo mais adequado para cada serviço.
           </p>
         </div>
 
@@ -185,7 +184,7 @@ export function ServiceCards() {
           <div className="flex-1 text-center md:text-left space-y-4">
             <h3 className="text-2xl font-bold text-secondary">Não sabe qual caminhão escolher?</h3>
             <p className="text-muted-foreground">
-              Sem problema. Durante o orçamento, a Leco Fretes analisa os itens, o local de retirada, o local de entrega e a necessidade de ajudante para indicar a melhor opção para o seu frete.
+              Sem problema. Durante o orçamento, Leco Fretes analisa os itens, o local de retirada, o local de entrega e a necessidade de ajudante para indicar a melhor opção para o seu frete.
             </p>
           </div>
           <Button asChild className="h-14 px-8 rounded-full bg-secondary text-white font-extrabold text-lg hover:scale-105 transition-all">
