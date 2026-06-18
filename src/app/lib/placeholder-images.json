@@ -12,6 +12,42 @@
       "description": "Caminhão Leco Fretes",
       "imageUrl": "https://i.postimg.cc/JhP9Ycqv/Chat-GPT-Image-18-de-jun-de-2026-19-42-20-(2).png",
       "imageHint": "caminhão frete"
+    },
+    {
+      "id": "iveco-1",
+      "description": "Iveco - Foto Principal",
+      "imageUrl": "https://i.postimg.cc/4yScWM7p/Captura-de-tela-2026-06-18-193615.png",
+      "imageHint": "caminhão iveco"
+    },
+    {
+      "id": "iveco-2",
+      "description": "Iveco - Detalhe 1",
+      "imageUrl": "https://i.postimg.cc/zvchxMbw/Captura-de-tela-2026-06-18-193627.png",
+      "imageHint": "caminhão iveco"
+    },
+    {
+      "id": "iveco-3",
+      "description": "Iveco - Detalhe 2",
+      "imageUrl": "https://i.postimg.cc/tJM6BfZ5/Captura-de-tela-2026-06-18-193643.png",
+      "imageHint": "caminhão iveco"
+    },
+    {
+      "id": "sprinter-1",
+      "description": "Sprinter - Foto Principal",
+      "imageUrl": "https://i.postimg.cc/Vk6ff6h0/Captura-de-tela-2026-06-18-193655.png",
+      "imageHint": "van sprinter"
+    },
+    {
+      "id": "sprinter-2",
+      "description": "Sprinter - Detalhe 1",
+      "imageUrl": "https://i.postimg.cc/XYzVpWM7/Captura-de-tela-2026-06-18-193704.png",
+      "imageHint": "van sprinter"
+    },
+    {
+      "id": "sprinter-3",
+      "description": "Sprinter - Detalhe 2",
+      "imageUrl": "https://i.postimg.cc/DwM28hVw/Captura-de-tela-2026-06-18-193725.png",
+      "imageHint": "van sprinter"
     }
   ]
 }

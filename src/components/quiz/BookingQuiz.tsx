@@ -1,9 +1,10 @@
 
 "use client"
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, Send, CheckCircle2, Loader2 } from 'lucide-react';
+import { ChevronLeft, Send, CheckCircle2, Loader2, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { StepRenderer } from './StepRenderer';
@@ -29,6 +30,7 @@ export type FormData = {
   date: string;
   time: string;
   name: string;
+  preferredTruck?: string;
 };
 
 const INITIAL_DATA: FormData = {
@@ -52,20 +54,28 @@ const INITIAL_DATA: FormData = {
   name: '',
 };
 
-const TOTAL_STEPS = 7; // Incluindo o resumo
+const TOTAL_STEPS = 7;
 
 export function BookingQuiz() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(INITIAL_DATA);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<{ size: string, reason: string } | null>(null);
+  
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const caminhao = searchParams.get('caminhao');
+    if (caminhao) {
+      setFormData(prev => ({ ...prev, preferredTruck: caminhao }));
+    }
+  }, [searchParams]);
 
   const updateFormData = (data: Partial<FormData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
   const handleNext = async () => {
-    // Se acabou de descrever os itens, busca recomendação da IA em background
     if (step === 1 && formData.items.length > 10) {
       setIsAiLoading(true);
       try {
@@ -85,12 +95,16 @@ export function BookingQuiz() {
   const progressValue = (step / TOTAL_STEPS) * 100;
 
   const generateMessage = () => {
+    const truckChoice = formData.preferredTruck 
+      ? `\n🚛 Caminhão de interesse: ${formData.preferredTruck.toUpperCase()}\n`
+      : "";
+
     const aiPart = aiRecommendation 
       ? `\n🤖 Recomendação Leco AI:\nVeículo: ${aiRecommendation.size}\nMotivo: ${aiRecommendation.reason}\n`
       : "";
 
     const message = `Olá, Leco Fretes! Gostaria de solicitar um orçamento.
-
+${truckChoice}
 📦 Tipo de serviço:
 ${formData.serviceType}
 
@@ -186,6 +200,15 @@ Aguardo o retorno com o orçamento. Obrigado!`;
                 <p className="font-bold text-secondary/60">Serviço</p>
                 <p className="font-medium">{formData.serviceType}</p>
               </div>
+              {formData.preferredTruck && (
+                <div className="space-y-1">
+                  <p className="font-bold text-secondary/60">Veículo Escolhido</p>
+                  <p className="font-medium flex items-center gap-2 text-secondary">
+                    <Truck className="h-4 w-4" />
+                    {formData.preferredTruck === 'iveco' ? 'Caminhão Iveco' : 'Sprinter'}
+                  </p>
+                </div>
+              )}
               <div className="space-y-1">
                 <p className="font-bold text-secondary/60">Retirada</p>
                 <p className="font-medium">{formData.pickupAddress}, {formData.pickupBairro} - {formData.pickupCity}</p>
