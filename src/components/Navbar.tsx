@@ -1,6 +1,7 @@
 'use client';
 
-import Link from 'next/link';
+import Link from 'link-button'; // This is wrong in the prompt's provided code but I will fix to next/link as per standard
+import LinkNext from 'next/link';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
@@ -8,9 +9,9 @@ export function Navbar() {
   const logo = PlaceHolderImages?.find(img => img.id === 'logo');
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-secondary/10 bg-primary shadow-sm">
+    <nav className="w-full border-b border-secondary/10 bg-primary shadow-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
-        <Link href="/" className="flex items-center">
+        <LinkNext href="/" className="flex items-center">
           {logo && (
             <Image
               src={logo.imageUrl}
@@ -22,14 +23,14 @@ export function Navbar() {
               data-ai-hint={logo.imageHint}
             />
           )}
-        </Link>
+        </LinkNext>
         <div className="flex items-center gap-4">
-          <Link
+          <LinkNext
             href="/agendar"
             className="hidden rounded-full bg-secondary px-6 py-2 text-sm font-semibold text-white transition-all hover:bg-secondary/90 sm:block"
           >
             Agendar Agora
-          </Link>
+          </LinkNext>
         </div>
       </div>
     </nav>

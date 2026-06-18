@@ -3,7 +3,6 @@ import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Presentation } from '@/components/sections/Presentation';
 import { ServiceCards } from '@/components/sections/ServiceCards';
-import { OwnerSection } from '@/components/sections/OwnerSection';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { CTAFinal } from '@/components/sections/CTAFinal';
 
@@ -15,7 +14,6 @@ export default function Home() {
         <Hero />
         <Presentation />
         <ServiceCards />
-        <OwnerSection />
         <Testimonials />
         <CTAFinal />
       </main>
