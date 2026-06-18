@@ -1,8 +1,9 @@
+
 "use client"
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { ChevronLeft, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { StepRenderer } from './StepRenderer';
@@ -28,7 +29,6 @@ export type FormData = {
   date: string;
   time: string;
   name: string;
-  whatsapp: string;
 };
 
 const INITIAL_DATA: FormData = {
@@ -50,10 +50,9 @@ const INITIAL_DATA: FormData = {
   date: '',
   time: '',
   name: '',
-  whatsapp: '',
 };
 
-const TOTAL_STEPS = 7; // Including summary
+const TOTAL_STEPS = 7; // Incluindo o resumo
 
 export function BookingQuiz() {
   const [step, setStep] = useState(1);
@@ -66,7 +65,7 @@ export function BookingQuiz() {
   };
 
   const handleNext = async () => {
-    // If we just finished items description, let's get AI recommendation in background
+    // Se acabou de descrever os itens, busca recomendação da IA em background
     if (step === 1 && formData.items.length > 10) {
       setIsAiLoading(true);
       try {
@@ -123,9 +122,6 @@ ${formData.time}
 
 👤 Nome:
 ${formData.name}
-
-📱 WhatsApp:
-${formData.whatsapp}
 
 Aguardo o retorno com o orçamento. Obrigado!`;
 
@@ -206,7 +202,6 @@ Aguardo o retorno com o orçamento. Obrigado!`;
 
             {aiRecommendation && (
               <div className="rounded-xl bg-primary/20 p-4 border border-primary/40 flex items-start gap-3 mt-4">
-                 <Loader2 className="h-5 w-5 text-secondary animate-spin hidden" />
                  <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-1" />
                  <div>
                     <p className="text-sm font-bold text-secondary">Sugestão de Caminhão (Leco AI): {aiRecommendation.size}</p>

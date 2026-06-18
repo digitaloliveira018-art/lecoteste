@@ -1,3 +1,4 @@
+
 "use client"
 
 import { FormData } from './BookingQuiz';
@@ -6,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Box, MapPin, Truck, Calendar, User, Info, Loader2 } from 'lucide-react';
+import { Box, Info, Loader2 } from 'lucide-react';
 
 type StepProps = {
   step: number;
@@ -21,11 +22,11 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
   const isStepValid = () => {
     switch (step) {
       case 1: return !!formData.serviceType;
-      case 2: return !!formData.pickupAddress && !!formData.pickupBairro && !!formData.pickupCity && !!formData.pickupAccess;
-      case 3: return !!formData.deliveryAddress && !!formData.deliveryBairro && !!formData.deliveryCity && !!formData.deliveryAccess;
+      case 2: return !!formData.pickupAddress && !!formData.pickupBairro && !!formData.pickupCity && !!formData.pickupAccess && (formData.pickupAccess !== "3" || !!formData.pickupStairs);
+      case 3: return !!formData.deliveryAddress && !!formData.deliveryBairro && !!formData.deliveryCity && !!formData.deliveryAccess && (formData.deliveryAccess !== "3" || !!formData.deliveryStairs);
       case 4: return !!formData.helpers;
       case 5: return !!formData.date && !!formData.time;
-      case 6: return !!formData.name && !!formData.whatsapp;
+      case 6: return !!formData.name;
       default: return true;
     }
   };
@@ -144,15 +145,13 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
 
             {formData.pickupAccess === "3" && (
               <div className="space-y-2 pl-6">
-                <Label>Quantos vãos de escada?</Label>
-                <RadioGroup value={formData.pickupStairs} onValueChange={(v) => updateFormData({ pickupStairs: v })} className="flex flex-wrap gap-2">
-                   {["1", "2", "3", "4+"].map(s => (
-                     <Label key={s} className={`border rounded-lg px-4 py-2 cursor-pointer ${formData.pickupStairs === s ? 'bg-primary border-primary' : ''}`}>
-                       <RadioGroupItem value={s} className="sr-only" />
-                       <span className="font-bold">{s}</span>
-                     </Label>
-                   ))}
-                </RadioGroup>
+                <Label>Quantos vãos de escada? (Ex: 2 vãos, 3 andares...)</Label>
+                <Input 
+                  placeholder="Escreva a quantidade..." 
+                  value={formData.pickupStairs} 
+                  onChange={(e) => updateFormData({ pickupStairs: e.target.value })}
+                  className="h-12"
+                />
               </div>
             )}
 
@@ -230,15 +229,13 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
 
             {formData.deliveryAccess === "3" && (
               <div className="space-y-2 pl-6">
-                <Label>Quantos vãos de escada?</Label>
-                <RadioGroup value={formData.deliveryStairs} onValueChange={(v) => updateFormData({ deliveryStairs: v })} className="flex flex-wrap gap-2">
-                   {["1", "2", "3", "4+"].map(s => (
-                     <Label key={s} className={`border rounded-lg px-4 py-2 cursor-pointer ${formData.deliveryStairs === s ? 'bg-primary border-primary' : ''}`}>
-                       <RadioGroupItem value={s} className="sr-only" />
-                       <span className="font-bold">{s}</span>
-                     </Label>
-                   ))}
-                </RadioGroup>
+                <Label>Quantos vãos de escada? (Ex: 2 vãos, 3 andares...)</Label>
+                <Input 
+                  placeholder="Escreva a quantidade..." 
+                  value={formData.deliveryStairs} 
+                  onChange={(e) => updateFormData({ deliveryStairs: e.target.value })}
+                  className="h-12"
+                />
               </div>
             )}
 
@@ -335,7 +332,7 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
       return (
         <div className="space-y-6">
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-secondary">Para finalizar, informe seus dados</h2>
+            <h2 className="text-2xl font-bold text-secondary">Para finalizar, informe seu nome</h2>
             <p className="text-muted-foreground">Como podemos te chamar?</p>
           </div>
           <div className="grid gap-4">
@@ -345,24 +342,6 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
                 placeholder="Ex: João da Silva" 
                 value={formData.name} 
                 onChange={(e) => updateFormData({ name: e.target.value })} 
-                className="h-14 text-lg"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Seu WhatsApp</Label>
-              <Input 
-                placeholder="(xx) xxxxx-xxxx" 
-                value={formData.whatsapp} 
-                onChange={(e) => {
-                  let val = e.target.value.replace(/\D/g, "");
-                  if (val.length > 11) val = val.slice(0, 11);
-                  if (val.length > 6) {
-                    val = `(${val.slice(0,2)}) ${val.slice(2,7)}-${val.slice(7)}`;
-                  } else if (val.length > 2) {
-                    val = `(${val.slice(0,2)}) ${val.slice(2)}`;
-                  }
-                  updateFormData({ whatsapp: val });
-                }} 
                 className="h-14 text-lg"
               />
             </div>
