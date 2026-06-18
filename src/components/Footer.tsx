@@ -1,17 +1,27 @@
-import { Truck, MapPin, Phone, MessageCircle } from 'lucide-react';
-import { COMPANY_NAME, WHATSAPP_NUMBER } from '@/app/lib/constants';
+import Image from 'next/image';
+import { MapPin, Phone, MessageCircle } from 'lucide-react';
+import { COMPANY_NAME } from '@/app/lib/constants';
+import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
 export function Footer() {
+  const logo = PlaceHolderImages.find(img => img.id === 'logo');
+
   return (
     <footer className="border-t bg-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-12 md:grid-cols-3">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-primary">
-                <Truck className="h-5 w-5 text-secondary" />
-              </div>
-              <span className="text-lg font-bold text-secondary">{COMPANY_NAME}</span>
+              {logo && (
+                <Image
+                  src={logo.imageUrl}
+                  alt={logo.description}
+                  width={150}
+                  height={50}
+                  className="h-10 w-auto object-contain"
+                  data-ai-hint={logo.imageHint}
+                />
+              )}
             </div>
             <p className="text-sm text-muted-foreground">
               Fretes rápidos, seguros e com preço justo para sua mudança ou transporte de itens avulsos.

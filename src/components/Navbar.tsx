@@ -1,17 +1,25 @@
 import Link from 'next/link';
-import { Truck } from 'lucide-react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/app/lib/placeholder-images';
 
 export function Navbar() {
+  const logo = PlaceHolderImages.find(img => img.id === 'logo');
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-            <Truck className="h-6 w-6 text-secondary" />
-          </div>
-          <span className="text-xl font-extrabold tracking-tight text-secondary">
-            LECO <span className="text-primary-foreground">FRETES</span>
-          </span>
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
+        <Link href="/" className="flex items-center">
+          {logo && (
+            <Image
+              src={logo.imageUrl}
+              alt={logo.description}
+              width={180}
+              height={60}
+              className="h-12 w-auto object-contain"
+              priority
+              data-ai-hint={logo.imageHint}
+            />
+          )}
         </Link>
         <div className="flex items-center gap-4">
           <Link
