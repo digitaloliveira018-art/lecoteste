@@ -44,10 +44,17 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
     );
   };
 
+  // Funções de limpeza para cada etapa
+  const resetStep1 = () => updateFormData({ serviceType: '', items: '' });
+  const resetStep2 = () => updateFormData({ pickupAccess: '', pickupStairs: '', pickupCustomAccess: '' });
+  const resetStep3 = () => updateFormData({ deliveryAccess: '', deliveryStairs: '', deliveryCustomAccess: '' });
+  const resetStep4 = () => updateFormData({ helpers: '' });
+  const resetStep5 = () => updateFormData({ time: '' });
+
   switch (step) {
     case 1:
       return (
-        <div className="space-y-6">
+        <div className="space-y-6" onClick={resetStep1}>
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-secondary">Qual tipo de frete você precisa?</h2>
             <p className="text-muted-foreground">Escolha a opção que melhor descreve sua necessidade.</p>
@@ -66,7 +73,10 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
                 <div key={option.id} className="space-y-4">
                   <Label 
                     className={getOptionClasses(isSelected, hasSelection)}
-                    onClick={() => updateFormData({ serviceType: option.id })}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateFormData({ serviceType: option.id });
+                    }}
                   >
                     <div className="flex items-center gap-4">
                       <div className={cn(
@@ -110,7 +120,14 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
             })}
           </div>
 
-          <Button disabled={!isStepValid()} onClick={onNext} className="w-full h-14 rounded-full text-lg font-bold bg-secondary">
+          <Button 
+            disabled={!isStepValid()} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }} 
+            className="w-full h-14 rounded-full text-lg font-bold bg-secondary"
+          >
             Continuar
           </Button>
         </div>
@@ -120,9 +137,10 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
     case 3:
       const isPickup = step === 2;
       const prefix = isPickup ? 'pickup' : 'delivery';
+      const resetFn = isPickup ? resetStep2 : resetStep3;
       
       return (
-        <div className="space-y-6">
+        <div className="space-y-6" onClick={resetFn}>
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-secondary">
               {isPickup ? "Onde será feita a retirada?" : "Onde será feita a entrega?"}
@@ -130,7 +148,7 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
             <p className="text-muted-foreground">Informe os dados do local de {isPickup ? "origem" : "destino"}.</p>
           </div>
           
-          <div className="grid gap-4 p-4 rounded-2xl bg-muted/20 border">
+          <div className="grid gap-4 p-4 rounded-2xl bg-muted/20 border" onClick={(e) => e.stopPropagation()}>
              <div className="space-y-2">
                 <Label className="flex items-center gap-2 text-secondary"><MapPin className="h-4 w-4" /> Endereço completo</Label>
                 <Input 
@@ -180,7 +198,10 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
                   <div key={opt.id} className="space-y-3">
                     <Label 
                       className={getOptionClasses(isSelected, hasSelection)}
-                      onClick={() => updateFormData({ [`${prefix}Access`]: opt.id })}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateFormData({ [`${prefix}Access`]: opt.id });
+                      }}
                     >
                       <div className="flex items-center gap-3">
                         <div className={cn(
@@ -249,7 +270,14 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
             </div>
           </div>
 
-          <Button disabled={!isStepValid()} onClick={onNext} className="w-full h-14 rounded-full text-lg font-bold bg-secondary">
+          <Button 
+            disabled={!isStepValid()} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }} 
+            className="w-full h-14 rounded-full text-lg font-bold bg-secondary"
+          >
             Continuar
           </Button>
         </div>
@@ -257,7 +285,7 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
 
     case 4:
       return (
-        <div className="space-y-6">
+        <div className="space-y-6" onClick={resetStep4}>
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-secondary">Vai precisar de ajudante?</h2>
             <p className="text-muted-foreground">Escolha se precisará de mão de obra para carregar os itens.</p>
@@ -276,14 +304,24 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
                 <Label
                   key={option}
                   className={getOptionClasses(isSelected, hasSelection)}
-                  onClick={() => updateFormData({ helpers: option })}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    updateFormData({ helpers: option });
+                  }}
                 >
                   <span className="text-lg font-bold">{option}</span>
                 </Label>
               );
             })}
           </div>
-          <Button disabled={!isStepValid()} onClick={onNext} className="w-full h-14 rounded-full text-lg font-bold bg-secondary">
+          <Button 
+            disabled={!isStepValid()} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }} 
+            className="w-full h-14 rounded-full text-lg font-bold bg-secondary"
+          >
             Continuar
           </Button>
         </div>
@@ -291,13 +329,13 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
 
     case 5:
       return (
-        <div className="space-y-6">
+        <div className="space-y-6" onClick={resetStep5}>
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-secondary">Para qual dia você deseja o frete?</h2>
             <p className="text-muted-foreground">Escolha a melhor data e período.</p>
           </div>
           <div className="grid gap-6">
-            <div className="space-y-2">
+            <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
               <Label className="text-secondary font-bold">Data desejada</Label>
               <Input 
                 type="date" 
@@ -324,7 +362,10 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
                             ? "opacity-40 border-muted text-muted-foreground" 
                             : "border-muted hover:border-secondary/30"
                       )}
-                      onClick={() => updateFormData({ time: t })}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateFormData({ time: t });
+                      }}
                     >
                       {t}
                     </Label>
@@ -333,7 +374,14 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
               </div>
             </div>
           </div>
-          <Button disabled={!isStepValid()} onClick={onNext} className="w-full h-14 rounded-full text-lg font-bold bg-secondary">
+          <Button 
+            disabled={!isStepValid()} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }} 
+            className="w-full h-14 rounded-full text-lg font-bold bg-secondary"
+          >
             Continuar
           </Button>
         </div>
@@ -371,7 +419,11 @@ export function StepRenderer({ step, formData, updateFormData, onNext, aiRecomme
             </div>
           )}
 
-          <Button disabled={!isStepValid() || isAiLoading} onClick={onNext} className="w-full h-16 rounded-full text-xl font-bold bg-secondary shadow-lg hover:shadow-secondary/20 transition-all">
+          <Button 
+            disabled={!isStepValid() || isAiLoading} 
+            onClick={onNext} 
+            className="w-full h-16 rounded-full text-xl font-bold bg-secondary shadow-lg hover:shadow-secondary/20 transition-all"
+          >
             Ver Resumo e Enviar
           </Button>
         </div>
